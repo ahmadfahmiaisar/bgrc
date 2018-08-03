@@ -1,5 +1,7 @@
 package com.bismillah.employee.retrofit;
 
+import org.json.JSONObject;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -12,7 +14,7 @@ public interface BaseApiService {
     @POST("userLogin.php")
     Call<ResponseBody> loginRequest(@Field("username") String username,
                                     @Field("password") String password,
-                                    @Field("level") String level);
+                                    @Field("level") JSONObject level);
  /*   @GET("login.php")
     Call login(@Path("username") String username, @Path("password") String password);*/
 }

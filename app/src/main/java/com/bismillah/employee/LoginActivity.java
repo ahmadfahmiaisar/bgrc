@@ -2,6 +2,7 @@ package com.bismillah.employee;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     EditText etUsername, etPassword;
     Button btnLogin;
     BaseApiService baseApiService;
@@ -44,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     public void loginbtn(View view) {
         String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
-        String level = "";
+        JSONObject level = null;
 
         if (validateLogin(username, password)) {
             doLogin(username, password, level);
@@ -63,22 +65,23 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
-    private void doLogin(final String username, final String password, final String level) {
+    private void doLogin(final String username, final String password, final JSONObject level) {
         baseApiService.loginRequest(etUsername.getText().toString(), etPassword.getText().toString(), level)
                 .enqueue(new retrofit2.Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.w(TAG, "onResponse: " + response);
                         if (response.isSuccessful()) {
                             try {
                                 JSONObject jsonObject = new JSONObject(response.body().string());
-                                /*if (jsonObject.optString("admin")) {
+                                if (jsonObject.getString("level").equals("admin")) {
                                     Toast.makeText(LoginActivity.this, "ini admin", Toast.LENGTH_LONG).show();
 
-                                     *//*  Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);*//*
-                                } else if (jsonObject.optBoolean("guest", true)) {
+                                } else if (jsonObject.getString("level").equals("guest")) {
                                     Toast.makeText(LoginActivity.this, "ini guest", Toast.LENGTH_LONG).show();
-                                }*/
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
