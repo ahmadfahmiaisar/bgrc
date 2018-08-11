@@ -87,10 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                                     Bundle bundle = new Bundle();
 
                                     String nama = etUsername.getText().toString();
-                                   /* String depart = level.getString("level").toString();*/
+                                    String depart = jsonObject.getString("level");
 
                                     bundle.putString("username", nama);
-                                   /* bundle.putString("departmen", depart);*/
+                                    bundle.putString("departmen", depart);
                                     intent.putExtras(bundle);
                                     startActivity(intent);
                                 } else if (jsonObject.getString("level").equals("admin")) {

@@ -25,6 +25,7 @@
                 android:text=" : " />
 
             <TextView
+                android:id="@+id/tv_namaEmployStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Lengkap" />
@@ -50,12 +51,38 @@
                 android:text=" : " />
 
             <TextView
+                android:id="@+id/tv_namaDepartStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nama Department" />
         </TableRow>
     </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" : " />
+
+            <TextView
+                android:id="@+id/tv_jenis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Official/Personal" />
+        </TableRow>
+    </FrameLayout>
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -75,6 +102,7 @@
                 android:text=" : " />
 
             <TextView
+                android:id="@+id/tv_tujuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tujuan Exit" />
@@ -100,6 +128,7 @@
                 android:text=" : " />
 
             <TextView
+                android:id="@+id/tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status Exit Pass" />
