@@ -14,6 +14,7 @@ import org.w3c.dom.Text;
 
 public class FormExitEmployee extends AppCompatActivity {
 
+    private TextView tvnama,tvlevel;
     private RadioButton rbOfficial, rbPersonal;
     private EditText etTujuan;
     @Override
@@ -21,26 +22,28 @@ public class FormExitEmployee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.employee_form_exit);
 
-        TextView tvnama = findViewById(R.id.tv_namaEmploye);
-        TextView tvlevel = findViewById(R.id.tv_namaDepart);
+        tvnama = findViewById(R.id.tv_namaEmploye);
+        tvlevel = findViewById(R.id.tv_namaDepart);
         rbOfficial = findViewById(R.id.rb_official);
         rbPersonal = findViewById(R.id.rb_personal);
         etTujuan = findViewById(R.id.et_tujuanExit);
 
-        Bundle b = getIntent().getExtras();
+       /* Bundle b = getIntent().getExtras();
         String nama = b.getString("username");
         String level = b.getString("departmen");
 
         tvnama.setText(nama);
-        tvlevel.setText(level);
+        tvlevel.setText(level);*/
     }
 
     public void submitform(View view) {
-        Intent intent = new Intent(FormExitEmployee.this, StatusEmploye.class);
+        Intent intent = new Intent(FormExitEmployee.this, NavEmployee.class);
         Bundle bundle = new Bundle();
 
-        String nama = bundle.getString("username");
-        String level = bundle.getString("departmen");
+        /*String nama = bundle.getString("username");
+        String level = bundle.getString("departmen");*/
+        String nama = tvnama.getText().toString();
+        String level = tvlevel.getText().toString();
         String official = rbOfficial.getText().toString();
         String personal = rbPersonal.getText().toString();
         String tujuan = etTujuan.getText().toString();
