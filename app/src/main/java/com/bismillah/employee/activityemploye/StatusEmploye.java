@@ -9,6 +9,7 @@ import com.bismillah.employee.R;
 public class StatusEmploye extends AppCompatActivity {
 
     TextView tvNama, tvDepart, tvJenis, tvTujuan, tvStatus;
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,17 +21,20 @@ public class StatusEmploye extends AppCompatActivity {
         tvTujuan = findViewById(R.id.tv_tujuan);
         tvStatus = findViewById(R.id.tv_status);
 
-        Bundle bundle = getIntent().getExtras();
-        String nama = bundle.getString("username");
-        String depart = bundle.getString("departmen");
-        String jenisO = bundle.getString("official");
-        String jenisP = bundle.getString("personal");
-        String tujuan = bundle.getString("tujuan");
+        if (getIntent().getExtras() != null){
+            bundle = getIntent().getExtras();
+            String nama = bundle.getString("username");
+            String depart = bundle.getString("departmen");
+            String jenisO = bundle.getString("official");
+            String jenisP = bundle.getString("personal");
+            String tujuan = bundle.getString("tujuan");
 
-        tvNama.setText(nama);
-        tvDepart.setText(depart);
-        tvJenis.setText(jenisO);
-        /*tvJenis.setText(jenisP);*/
-        tvTujuan.setText(tujuan);
+            tvNama.setText(nama);
+            tvDepart.setText(depart);
+            tvJenis.setText(jenisO);
+            /*tvJenis.setText(jenisP);*/
+            tvTujuan.setText(tujuan);
+        }
+
     }
 }

@@ -86,7 +86,11 @@ public class NavEmployee extends AppCompatActivity
 
         } else if (id == R.id.nav_status) {
             Intent pindah = new Intent(NavEmployee.this, StatusEmploye.class);
-            Bundle b = getIntent().getExtras();
+            if (getIntent().getExtras() != null){
+                Bundle bundle = getIntent().getExtras();
+                pindah.putExtras(bundle);
+            }
+            /*Bundle b = getIntent().getExtras();
             String nama = b.getString("username");
             String level = b.getString("departmen");
             String official = b.getString("official");
@@ -97,7 +101,7 @@ public class NavEmployee extends AppCompatActivity
             b.putString("official", official);
             b.putString("personal", personal);
             b.putString("tujuan", tujuan);
-            pindah.putExtras(b);
+            pindah.putExtras(b);*/
             startActivity(pindah);
 
         } else if (id == R.id.nav_logout) {
