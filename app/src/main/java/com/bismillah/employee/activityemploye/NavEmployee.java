@@ -86,7 +86,7 @@ public class NavEmployee extends AppCompatActivity
 
         } else if (id == R.id.nav_status) {
             Intent pindah = new Intent(NavEmployee.this, StatusEmploye.class);
-           Bundle b = getIntent().getExtras();
+            Bundle b = getIntent().getExtras();
             String nama = b.getString("username");
             String level = b.getString("departmen");
             String official = b.getString("official");

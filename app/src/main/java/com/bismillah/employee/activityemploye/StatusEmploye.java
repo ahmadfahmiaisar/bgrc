@@ -20,7 +20,7 @@ public class StatusEmploye extends AppCompatActivity {
         tvTujuan = findViewById(R.id.tv_tujuan);
         tvStatus = findViewById(R.id.tv_status);
 
-        Bundle bundle = new Bundle();
+        Bundle bundle = getIntent().getExtras();
         String nama = bundle.getString("username");
         String depart = bundle.getString("departmen");
         String jenisO = bundle.getString("official");
