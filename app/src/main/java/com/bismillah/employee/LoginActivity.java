@@ -2,6 +2,7 @@ package com.bismillah.employee;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bismillah.employee.activityemploye.FormExitEmployee;
+import com.bismillah.employee.activityemploye.NavEmployee;
 import com.bismillah.employee.retrofit.BaseApiService;
 import com.bismillah.employee.retrofit.UtilsApi;
 
@@ -18,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -51,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
         if (validateLogin(username, password)) {
             doLogin(username, password, level);
         }
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("sabar loading ...");
+        progressDialog.show();
     }
 
     private boolean validateLogin(String username, String password) {
@@ -72,15 +79,22 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Log.w(TAG, "onResponse: " + response);
                         if (response.isSuccessful()) {
+                            progressDialog.dismiss();
                             try {
                                 JSONObject jsonObject = new JSONObject(response.body().string());
-                                if (jsonObject.getString("level").equals("admin")) {
-                                    Toast.makeText(LoginActivity.this, "ini admin", Toast.LENGTH_LONG).show();
+                                if (jsonObject.getString("level").equals("guest")) {
+                                    Intent intent = new Intent(LoginActivity.this, NavEmployee.class);
+                                    Bundle bundle = new Bundle();
 
-                                } else if (jsonObject.getString("level").equals("guest")) {
-                                    Toast.makeText(LoginActivity.this, "ini guest", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "gagal", Toast.LENGTH_LONG).show();
+                                    String nama = etUsername.getText().toString();
+                                   /* String depart = level.getString("level").toString();*/
+
+                                    bundle.putString("username", nama);
+                                   /* bundle.putString("departmen", depart);*/
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                } else if (jsonObject.getString("level").equals("admin")) {
+                                    Toast.makeText(LoginActivity.this, "ini admin", Toast.LENGTH_LONG).show();
                                 }
 
                             } catch (JSONException e) {
@@ -96,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
                         Log.e("debug", "onFailure: ERROR > " + t.toString());
+                        progressDialog.dismiss();
                     }
                 });
     }
